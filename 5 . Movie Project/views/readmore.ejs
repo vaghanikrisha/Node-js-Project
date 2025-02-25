@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read More</title>
+    <!-- icons -->
+    <link rel="stylesheet" href="/css/all.min.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <style>
+        h2 {
+            font-size: 65px;
+            color: #fff;
+        }
+
+        p {
+            font-size: 22px;
+            color: #fff;
+        }
+
+        .image {
+            height: 650px;
+            line-height: 550px;
+        }
+
+        .btns a {
+            width: 32%;
+            font-size: 22px !important;
+            padding: 10px !important;
+        }
+
+        .btns form {
+            width: 32%;
+        }
+
+        .btns form input[type='submit'] {
+            width: 100%;
+            font-size: 22px;
+            padding: 10px;
+        }
+
+        .btns a.buy {
+            background-color: rgb(0, 0, 0);
+        }
+
+        .btns a.buy:hover {
+            background-color: rgba(27, 27, 27, 0.932);
+        }
+
+        .quantity .quantity-btns a,
+        .quantity .quantity-btns span {
+            font-size: 30px;
+            text-decoration: none;
+            color: #000;
+            padding-left: 30px;
+        }
+
+        /* Glassmorphism Style for content section */
+        .glassmorphism-card {
+            background: rgba(255, 255, 255, 0.1);
+            /* Semi-transparent background */
+            border-radius: 15px;
+            backdrop-filter: blur(15px);
+            /* Apply blur effect */
+            -webkit-backdrop-filter: blur(15px);
+            /* Support for Safari */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 30px;
+            color: white;
+        }
+
+        /* Image Styling */
+        .image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-top: 12%;
+        }
+
+        /* Adjust card layout */
+        .content {
+            margin-top: 6%;
+        }
+
+        /* Hover effects */
+        .content a {
+            padding: 10px 20px;
+            background-color: rgba(165, 71, 16, 0.87);
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .content a:hover {
+            background-color: rgba(165, 71, 16, 1);
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('navbar') %>
+
+        <section class="p-5"
+            style="background: url(https://images.pexels.com/photos/3379942/pexels-photo-3379942.jpeg?auto=compress&cs=tinysrgb&w=600); height: 86.7vh; background-repeat: no-repeat; background-position: center; background-size: cover; opacity: 0.9; background-blend-mode: darken;">
+            <div class="container">
+                <div class="row d-flex">
+                    <!-- Image Section -->
+                    <div class="image col-6">
+                        <img src="<%= single.image %>" alt="<%= single.image %>" height="700" width="600">
+                    </div>
+
+                    <!-- Content Section with Glassmorphism Effect -->
+                    <div class="content col-6 ps-5">
+                        <div class="glassmorphism-card">
+                            <h2 class="mb-3"><strong>Title:</strong>
+                                <%= single.name %>
+                            </h2>
+                            <p><strong>Director:</strong>
+                                <%= single.director %>
+                            </p>
+                            <p><strong>Release Date:</strong>
+                                <%= single.date %>
+                            </p>
+                            <p style="margin-bottom: 50px;"><strong>Description:</strong>
+                                <%= single.description %>
+                            </p>
+                            <a href="/" class="btn btn-dark">Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bootstrap JS -->
+        <script src="/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            let count = document.getElementById('count').textContent;
+            let total = document.getElementById('total').textContent;
+
+            const increment = (event) => {
+                event.preventDefault();
+                count++;
+                document.getElementById('count').textContent = count;
+                document.getElementById('total').textContent = total * count;
+                document.getElementById('cartCount').value = count;
+            }
+
+            const decrement = (event) => {
+                event.preventDefault();
+                if (count > 1) {
+                    count--;
+                    document.getElementById('count').textContent = count;
+                    document.getElementById('total').textContent = total * count;
+                    document.getElementById('cartCount').value = count;
+                }
+            }
+        </script>
+</body>
+
+</html>

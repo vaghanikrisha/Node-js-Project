@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Reading Corner</title>
+    <!-- icons  -->
+    <link rel="stylesheet" href="/css/all.min.css">
+    <!-- bootstrap  -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <style>
+    .card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .card .image {
+        position: relative;
+        width: 100%;
+        height: 450px; /* Set a consistent height for the image */
+    }
+
+    .card .image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 15px;
+        transition: transform 0.4s ease;
+    }
+
+    .card:hover .image img {
+        transform: scale(1.1);
+    }
+
+    .card .content {
+        position: absolute;
+        bottom: -100%; /* Start hidden below the card */
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+        color: white;
+        padding: 20px;
+        text-align: center;
+        transition: bottom 0.4s ease; /* Smooth transition for sliding up */
+        border-radius: 0 0 15px 15px;
+    }
+
+    .card:hover .content {
+        bottom: 15%; /* Slide content to the center of the card */
+        transform: translateY(50%); /* Adjust to ensure it's centered visually */
+    }
+
+    .card .content h4 {
+        margin: 0 0 10px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .card .content p {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+
+    .card .content .btn {
+        margin-top: 10px;
+        text-decoration: none;
+        color: #fff;
+        background: #ff6b6b;
+        padding: 8px 15px;
+        border-radius: 20px;
+        transition: background 0.3s ease;
+    }
+
+    .card .content .btn:hover {
+        background: #ff4757;
+    }
+</style>
+
+    </style>
+    
+</head>
+
+<body>
+    <%- include('navbar') %>
+
+        <section class="p-5">
+            <div class="container">
+                <div class="row">
+                    <% allData.map((data,i)=> { %>
+                        <% const {name,price,pages,author,image,description,_id}=data; %>
+                            <div class="col-3 p-2">
+                                <div class="card border border-bottom-0 position-relative">
+                                    <div class="image text-center">
+                                        <img src="<%= image %>" alt="<%= image %>" height="350" width="100%">
+                                      
+                                    </div>
+                                    <div class="content border border-top-0">
+                                        <h4>
+                                            <%= name %>
+                                        </h4>
+                                        <p>
+                                            <%= author %> (Author)
+                                        </p>
+                                        <div class="d-flex justify-content-between">
+                                            <a href="/editdata?editId=<%= _id %>"><i
+                                                    class="fa-regular fa-pen-to-square btn btn-outline-dark px-3"
+                                                    style="font-family: 'Font Awesome 6 Free';"></i></a>
+                                            <a href="/readmore?readmoreId=<%= _id %>" class="btn btn-dark px-4">Read
+                                                More</a>
+                                            <a href="/deletedata?deleteId=<%= _id %>"><i
+                                                    class="fa-regular fa-trash-can btn btn-outline-dark px-3"
+                                                    style="font-family: 'Font Awesome 6 Free';"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                </div>
+            </div>
+        </section>
+
+        <!-- bootstrap  -->
+        <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

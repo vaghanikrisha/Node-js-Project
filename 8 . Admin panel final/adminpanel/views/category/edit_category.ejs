@@ -1,0 +1,147 @@
+<%- include('../header') %>
+
+<style>
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background:linear-gradient(135deg, #cecfd3, #243b55);
+    margin: 0;
+    padding: 0;
+}
+
+/* Page Wrapper */
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background:linear-gradient(135deg, #cecfd3, #243b55);
+    padding: 20px;
+  }
+
+
+/* Container */
+.container {
+    display: flex;
+    justify-content: center;
+    margin-left: 100px;
+    
+}
+
+/* Card Styling */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+    padding: 25px;
+    transition: 0.3s ease-in-out;
+    width: 100%;
+    max-width: 500px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Card Title */
+.card-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+
+.form-control:focus {
+    border-color: #ff758c;
+    box-shadow: 0 0 8px rgba(255, 117, 140, 0.5);
+}
+
+/* Label Styling */
+.control-label {
+    font-weight: 600;
+    color: #555;
+}
+
+/* Button Styles */
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: 0.3s ease-in-out;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    display: block;
+    text-transform: uppercase;
+}
+.btn-primary:hover {
+    background: linear-gradient(135deg, #ff7eb3, #ff758c);
+    box-shadow: 0px 4px 10px rgba(255, 117, 140, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card {
+        width: 90%;
+    }
+
+    .form-control {
+        font-size: 14px;
+    }
+}
+</style>
+
+<div class="page-wrapper">
+    <div class="container">
+        <div class="card">
+            <form class="form-horizontal" method="post" action="/category/updatecategory">
+                <input type="hidden" name="editid" value="<%= single?.id %>">
+                <div class="card-body">
+                    <h4 class="card-title">Edit Category</h4>
+                    <div class="form-group row">
+                        <label for="category" class="col-sm-4 control-label col-form-label">Category Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="category" name="category" value="<%= single?.category %>" 
+                                class="form-control" placeholder="Enter Category Name" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-top">
+                    <div class="card-body">
+                        <button type="submit" class="btn btn-primary">Update Category</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../footer') %>

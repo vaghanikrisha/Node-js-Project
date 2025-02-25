@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlissFull Pages </title>
+    <!-- icons  -->
+    <link rel="stylesheet" href="/css/all.min.css">
+    <!-- bootstrap  -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <style>
+    .card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .card .image {
+        position: relative;
+        width: 100%;
+        object-fit: cover;
+        height: 450px; /* Set a consistent height for the image */
+    }
+
+    .card .image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 15px;
+        transition: transform 0.4s ease;
+    }
+
+    .card:hover .image img {
+        transform: scale(1.1);
+    }
+
+    .card .content {
+        position: absolute;
+        bottom: -100%; /* Start hidden below the card */
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+        color: white;
+        padding: 20px;
+        text-align: center;
+        transition: bottom 0.4s ease; /* Smooth transition for sliding up */
+        border-radius: 0 0 15px 15px;
+    }
+
+    .card:hover .content {
+        bottom: 15%; /* Slide content to the center of the card */
+        transform: translateY(50%); /* Adjust to ensure it's centered visually */
+    }
+
+    .card .content h4 {
+        margin: 0 0 10px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .card .content p {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+
+    .card .content .btn {
+        margin-top: 10px;
+        text-decoration: none;
+        color: #fff;
+        background: rgba(165, 71, 16, 0.87);;
+        padding: 8px 15px;
+        border-radius: 20px;
+        transition: background 0.3s ease;
+    }
+
+    .card .content .btn:hover {
+        background:  rgba(165, 71, 16, 0.87);;
+    }
+</style>
+
+    </style>
+    
+</head>
+
+<body>
+    <%- include('navbar') %>
+
+    <section class="p-5"
+    style="
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), 
+                    url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpOWsm8tYLHOFYaf6tzaGzAfNAUeYOiYyWhA&s');
+        min-height: 100vh;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        color: white;">
+    <div class="container">
+
+        <div class="row">
+            <% allData.map((data, i) => { %>
+                <% const { name, date, director, image, description, _id } = data; %>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card border-0 shadow position-relative">
+                        <div class="image">
+                            <img src="<%= image %>" alt="<%= image %>" class="img-fluid">
+                        </div>
+                        <div class="content p-3">
+                            <h4><%= name %></h4>
+                            <p>Directed by: <%= director %></p>
+                            <div class="d-flex justify-content-between">
+                                <a href="/editdata?editId=<%= _id %>" class="btn btn-outline-warning">
+                                    <i class="fa-regular fa-pen-to-square"></i> Edit
+                                </a>
+                                <a href="/readmore?readmoreId=<%= _id %>" class="btn btn-warning">
+                                    Read More
+                                </a>
+                                <a href="/deletedata?deleteId=<%= _id %>" class="btn btn-outline-danger">
+                                    <i class="fa-regular fa-trash-can"></i> Delete
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</section>
+
+
+        <!-- bootstrap  -->
+        <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

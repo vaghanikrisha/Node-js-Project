@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit blog</title>
+    <!-- icons  -->
+    <link rel="stylesheet" href="/css/all.min.css">
+    <!-- bootstrap  -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <style>
+        * {
+            outline: none;
+        }
+
+        label {
+            padding-top: 10px;
+            margin-bottom: 3px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('navbar') %>
+
+        <section class="p-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-5">
+                        <form action="/updateData" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="updateId" value="<%= single._id %>">
+                            <label for="image" class="form-label" style="font-weight: 800; font-size: 20px;">Cover Image</label>
+                            <div class="d-flex">
+                                <input type="file" class="form-control" name="image">
+                                <img src="<%= single.image %>" alt="<%= single.image %>" height="150">
+                            </div>
+                            <label for="name" class="form-label" style="font-weight: 800; font-size: 20px;">Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Book Name" name="name" value="<%= single.name %>">
+                            <label for="author" class="form-label" style="font-weight: 800; font-size: 20px;">Author</label>
+                            <input type="text" class="form-control" placeholder="Enter Book Author" name="author" value="<%= single.author %>">
+                            <label for="description" class="form-label" style="font-weight: 800; font-size: 20px;">Description</label>
+                            <textarea rows="3" class="form-control" placeholder="Enter Description"
+                                name="description"><%= single.description %></textarea>
+                            <input type="Submit" value="Update Blog" class="btn btn-dark mt-3 py-3 form-control" style="background-color: rgba(28, 83, 74, 0.822); font-size: 20px; font-weight: 700;">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- bootstrap  -->
+        <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

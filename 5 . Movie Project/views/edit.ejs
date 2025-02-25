@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Blog</title>
+    <!-- icons  -->
+    <link rel="stylesheet" href="/css/all.min.css">
+    <!-- bootstrap  -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <style>
+        * {
+            outline: none;
+        }
+
+        label {
+            padding-top: 10px;
+            margin-bottom: 3px !important;
+        }
+
+        /* Glassmorphism effect for the form container */
+        .glass-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 30px;
+        }
+
+        /* Styling for labels */
+        label {
+            font-weight: 800;
+            font-size: 20px;
+            color: #fff;
+        }
+
+        /* Button styling */
+        .btn-custom {
+            background-color: rgba(165, 71, 16, 0.87);
+            font-size: 20px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('navbar') %>
+
+        <section class="p-5" style="background: url(https://images.pexels.com/photos/3379942/pexels-photo-3379942.jpeg?auto=compress&cs=tinysrgb&w=600); height: 86.7vh; background-repeat: no-repeat; background-position: center; background-size: cover; opacity: 0.9; background-blend-mode: darken; backdrop-filter: blur(20px);">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-5 glass-container">
+                        <form action="/updateData" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="updateId" value="<%= single._id %>">
+                            <label for="image" class="form-label">Cover Image : </label>
+                            <div class="d-flex">
+                                <input type="file" class="form-control" name="image">
+                                <img src="<%= single.image %>" alt="<%= single.image %>" height="150">
+                            </div>
+                            <label for="name" class="form-label">Name : </label>
+                            <input type="text" class="form-control" placeholder="Enter Movie Name" name="name" value="<%= single.name %>">
+
+                            <label for="director" class="form-label">Name of Director :</label>
+                            <input type="text" class="form-control" placeholder="Enter Movie Director" name="director" value="<%= single.director %>">
+
+                            <label for="date" class="form-label">Release Date :</label>
+                            <input type="date" class="form-control" placeholder="Enter Release Movie Date" name="date" value="<%= single.date %>">
+
+                            <label for="description" class="form-label">Description : </label>
+                            <textarea rows="3" class="form-control" placeholder="Enter Description" name="description"><%= single.description %></textarea>
+                            <input type="submit" value="Update Movie" class="btn btn-dark mt-3 py-3 form-control btn-custom">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- bootstrap  -->
+        <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

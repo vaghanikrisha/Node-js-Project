@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book</title>
+    <!-- icons  -->
+    <link rel="stylesheet" href="/css/all.min.css">
+    <!-- bootstrap  -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <style>
+        * {
+            outline: none;
+        }
+
+        label {
+            padding-top: 10px;
+            margin-bottom: 3px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('navbar') %>
+
+        <section class="p-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-5">
+                        <form action="/insertData" method="post" enctype="multipart/form-data">
+                            <label for="image" class="form-label">Cover Image</label>
+                            <input type="file" class="form-control" name="image">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Book Name" name="name">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="number" class="form-control" placeholder="Enter Book Price" name="price">
+                            <label for="pages" class="form-label">Pages</label>
+                            <input type="number" class="form-control" placeholder="Enter Number of Pages" name="pages">
+                            <label for="author" class="form-label">Author</label>
+                            <input type="text" class="form-control" placeholder="Enter Book Author" name="author">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea rows="3" class="form-control" placeholder="Enter Description"
+                                name="description"></textarea>
+                            <input type="Submit" value="Add Book" class="btn mt-3 py-3 form-control" style="background-color:  rgba(129, 35, 35, 0.822); font-size: 20px; font-weight: 700; color: #fff;">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- bootstrap  -->
+        <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

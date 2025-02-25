@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book</title>
+    <!-- icons  -->
+    <link rel="stylesheet" href="/css/all.min.css">
+    <!-- bootstrap  -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <style>
+        * {
+            outline: none;
+        }
+
+        label {
+            padding-top: 10px;
+            margin-bottom: 3px !important;
+        }
+
+        /* Glassmorphism effect */
+        .glass-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 30px;
+        }
+
+        /* Section background styling */
+        section {
+            background: url('https://images.pexels.com/photos/3379942/pexels-photo-3379942.jpeg?auto=compress&cs=tinysrgb&w=600') no-repeat center center/cover;
+            height: 86.7vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-blend-mode: darken;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Button styling */
+        .btn-custom {
+            background-color: rgba(165, 71, 16, 0.87);
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .btn-custom:hover{
+            background-color: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('navbar') %>
+
+    <section>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-5 glass-container">
+                    <form action="/insertData" method="post" enctype="multipart/form-data">
+                        <label for="image" class="form-label" style="color: #fff; font-size: 20px;">Cover Image:</label>
+                        <input type="file" class="form-control" name="image">
+
+                        <label for="name" class="form-label" style="color: #fff; font-size: 20px;">Name of Movie: </label>
+                        <input type="text" class="form-control" placeholder="Enter Movie Name" name="name">
+
+                        <label for="author" class="form-label" style="color: #fff; font-size: 20px;">Name of Director:</label>
+                        <input type="text" class="form-control" placeholder="Enter Movie Director Name" name="director">
+
+                        <label for="date" class="form-label" style="color: #fff; font-size: 20px;">Release Date:</label>
+                        <input type="date" class="form-control" placeholder="Enter Release Movie Date" name="date">
+
+                        <label for="description" class="form-label" style="color: #fff; font-size: 20px;">Description of Movie:</label>
+                        <textarea rows="3" class="form-control" placeholder="Enter Movie Description" name="description"></textarea>
+
+                        <input type="Submit" value="Publish Movie" class="btn mt-3 py-3 form-control btn-custom">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- bootstrap  -->
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

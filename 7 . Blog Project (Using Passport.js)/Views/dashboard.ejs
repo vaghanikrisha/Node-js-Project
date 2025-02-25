@@ -1,0 +1,161 @@
+<%- include('Header') %>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Management</title>
+
+    <!-- Include Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        font-family: 'Poppins', sans-serif;
+        color: #333;
+      }
+
+      h3 {
+        font-weight: bold;
+        color: #444;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .card {
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      #pics {
+        object-fit: cover;
+        height: 200px;
+        width: 100%;
+        border-bottom: 5px solid #ffc107;
+      }
+
+      .card-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .card-text {
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #555;
+      }
+
+      .btn {
+        border-radius: 5px;
+        font-size: 0.9rem;
+        padding: 10px 20px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      .btn-primary {
+        background-color: #007bff;
+        border: none;
+      }
+
+      .btn-primary:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+      }
+
+      .btn-danger {
+        background-color: #dc3545;
+        border: none;
+      }
+
+      .btn-danger:hover {
+        background-color: #a71d2a;
+        transform: scale(1.05);
+      }
+
+      .row {
+        gap: 30px;
+        margin-top: 20px;
+      }
+
+      @media (max-width: 768px) {
+        #pics {
+          height: 150px;
+        }
+
+        .card-title {
+          font-size: 1.25rem;
+        }
+
+        .card-text {
+          font-size: 0.95rem;
+        }
+
+        .btn {
+          padding: 8px 16px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page-wrapper">
+      <div class="page-breadcrumb">
+        <div class="container">
+          <h3>Hello <%= locals.users.name %>!</h3>
+
+          <div class="row">
+            <% blogs.map((blog, i) => { %>
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card">
+                <img
+                  src="<%= blog.image %>"
+                  class="card-img-top"
+                  alt="Blog Image"
+                  id="pics"
+                />
+                <div class="card-body">
+                  <h5 class="card-title text-capitalize"><%= blog.title %></h5>
+                  <p class="card-text"><%= blog.caption %></p>
+                  <div class="d-flex justify-content-between">
+                    <a
+                      href="/deleteblog?id=<%= blog._id %>"
+                      class="btn btn-danger text-white"
+                      >Delete</a
+                    >
+                    <a
+                      class="btn btn-primary text-white"
+                      href="/editblog?id=<%= blog._id %>"
+                      >Edit</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<%- include('Footer') %>

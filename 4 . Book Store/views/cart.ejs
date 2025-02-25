@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Cart</title>
+    <!-- icons  -->
+    <link rel="stylesheet" href="/css/all.min.css">
+    <!-- bootstrap  -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <style>
+        table{
+            font-size: 22px;
+        }
+        td{
+            padding: 15px 0 !important;
+        }
+        .actions a,.actions form input[type='submit']{
+            width: 80%;
+        }
+        .actions a:first-child{
+            border-color: rgb(14, 14, 14);
+            color: rgb(17, 17, 17);
+        }
+        .actions a:first-child:hover{
+            background-color: rgb(24, 24, 23);
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('navbar') %>
+
+    <section class="py-5">
+        <div class="col-10 mx-auto text-center">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" width="5%">#</th>
+                        <th scope="col" width="20%">Image</th>
+                        <th scope="col" width="30%">Name</th>
+                        <th scope="col" width="13%">Quantity</th>
+                        <th scope="col" width="12%">Price</th>
+                        <th scope="col" width="20%">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% allData.map((data,i) => { %>
+                        <% const {_id,name,price,image,count} = data; %>
+                        <tr>
+                            <td><%= ++i %></td>
+                            <td><a href="/readmore?readmoreId=<%= _id %>"><img src="<%= image %>" alt="<%= image %>" height="250"></a></td>
+                            <td><a href="/readmore?readmoreId=<%= _id %>" class="fs-2 text-decoration-none text-dark"><%= name %></a></td>
+                            <td class="quantity-btns">
+                                <a href="#" onclick="decrement(event,'<%= _id %>','<%= price %>')" class="text-decoration-none text-dark pe-4"><i class="fa-solid fa-minus fs-6"></i></a>
+                                <span id="count-<%= _id %>"><%= count %></span>
+                                <a href="#" onclick="increment(event,'<%= _id %>','<%= price %>')" class="text-decoration-none text-dark ps-4"><i class="fa-solid fa-plus fs-6"></i></a>
+                            </td>
+                            <td>₹ <span id="total-<%= _id %>"><%= price*count %></span></td>
+                            <td class="actions">
+                                <a href="#" class="btn btn-outline-dark fs-5 my-3 py-2">Buy Now</a>
+                                <a href="/delfromcart?deleteId=<%= _id %>" class="btn btn-outline-dark fs-5 my-3 py-2">Delete</a>
+                                
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+      <!-- bootstrap  -->
+      <script src="/js/bootstrap.bundle.min.js"></script>
+
+      <script>
+        const increment = (event, id, price) => {
+            event.preventDefault();
+            const countElem = document.getElementById(`count-${id}`);
+            const totalElem = document.getElementById(`total-${id}`);
+            let count = parseInt(countElem.textContent);
+            count++;
+            countElem.textContent = count;
+            totalElem.textContent = price * count;
+        }
+
+        const decrement = (event, id, price) => {
+            event.preventDefault();
+            const countElem = document.getElementById(`count-${id}`);
+            const totalElem = document.getElementById(`total-${id}`);
+            let count = parseInt(countElem.textContent);
+            if (count > 1) {
+                count--;
+                countElem.textContent = count;
+                totalElem.textContent = price * count;
+            }
+        }
+    </script>
+</body>
+
+</html>

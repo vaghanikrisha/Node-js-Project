@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read More</title>
+    <!-- icons  -->
+    <link rel="stylesheet" href="/css/all.min.css">
+    <!-- bootstrap  -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <style>
+        h1{
+            font-size: 65px;
+        }
+        p{
+            font-size: 22px;
+        }
+        p.price{
+            font-size: 45px;
+        }
+        .image{
+            height: 650px;
+            line-height: 550px;
+        }
+        .btns a{
+            width: 32%;
+            font-size: 22px !important;
+            padding: 10px !important;
+        }
+        .btns form{
+            width: 32%;
+        }
+        .btns form input[type='submit']{
+            width: 100%;
+            font-size: 22px;
+            padding: 10px;
+        }
+        .btns a.buy{
+            background-color: rgb(0, 0, 0);
+        }
+        .btns a.buy:hover{
+            background-color: rgba(27, 27, 27, 0.932);
+        }
+        .quantity .quantity-btns a,.quantity .quantity-btns span{
+            font-size: 30px;
+            text-decoration: none;
+            color: #000;
+            padding-left: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('navbar') %>
+
+    <section class="p-5">
+        <div class="container">
+            <div class="row d-flex">
+                <div class="image col-6">
+                    <img src="<%= single.image %>" alt="<%= single.image %>" height="700" width="600">
+                </div>
+                <div class="content col-6 ps-5" style="margin-top: 6%;">
+                    <h2 class="mb-3"><strong>Title : </strong> <%= single.name %></h2>
+                    <p> <strong>Author :</strong> <%= single.author %></p>
+                    <p> <strong>Page :</strong> <%= single.pages %></p>
+                    <p><strong>Description : </strong><%= single.description %></p>
+                    <p><strong>Price : </strong> ₹ <span id="total"><%= single.price %></span></p>
+                    <a href="/"  style="padding: 10px 20px; background-color: rgba(129, 35, 35, 0.822); color: #fff; text-decoration: none; font-size: 20px; border-radius: 10px;"><span>Dashboard</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- bootstrap  -->
+    <script src="/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let count = document.getElementById('count').textContent;
+        let total = document.getElementById('total').textContent;
+        
+        const increment = (event) => {
+            event.preventDefault();
+            count++;
+            document.getElementById('count').textContent = count;
+            document.getElementById('total').textContent = total*count;
+            document.getElementById('cartCount').value = count;
+        }
+        const decrement = (event) => {
+            event.preventDefault();
+            if(count > 1){
+                count--;
+                document.getElementById('count').textContent = count;
+                document.getElementById('total').textContent = total*count;
+                document.getElementById('cartCount').value = count;
+            }
+        }
+    </script>
+</body>
+
+</html> 

@@ -1,0 +1,207 @@
+<%- include('../header') %>
+
+<style>
+    /* General Styles */
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #f8f9fa, #e3e4e6);
+        padding: 20px;
+    }
+
+    /* Page Wrapper */
+    .page-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    /* Form Card */
+    .card {
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .card-title {
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Form Elements */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        transition: border-color 0.3s;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+    /* Submit Button */
+    .btn-primary {
+        background: linear-gradient(45deg, #007bff, #0056b3);
+        color: white;
+        padding: 10px 15px;
+        width: 100%;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.3s;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(45deg, #0056b3, #004085);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .card {
+            width: 90%;
+        }
+    }
+</style>
+
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                
+                <% if(locals?.message?.success) { %>
+                <div class="alert alert-success" role="alert">
+                    <%= locals?.message?.success %>
+                </div>
+                <% } %>
+
+                <div class="card">
+                    <form class="form-horizontal" method="post" action="/exsubcategory/insertexsubcategory">
+                        <div class="card-body">
+                            <h4 class="card-title">Product</h4>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Category</label>
+                                <div class="col-sm-9">
+                                    <select name="category" id="category" onchange="categoryRecord()" class="form-control">
+                                        <option value="">---select category---</option>
+                                        <% category.map((cat,index)=>{ %>
+                                            <option value="<%= cat?.id %>"><%= cat?.category %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Subcategory</label>
+                                <div class="col-sm-9">
+                                    <select name="subcategory" id="subcategory" onchange="subcategoryRecord()" class="form-control">
+                                        <option value="">---select subcategory---</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Exsubcategory</label>
+                                <div class="col-sm-9">
+                                    <select name="exsubcategory" id="exsubcategory" class="form-control">
+                                        <option value="">---select exsubcategory---</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Product</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="product" class="form-control" placeholder="Enter Product Name">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Price</label>
+                                <div class="col-sm-9">
+                                    <input type="number" name="price" class="form-control" placeholder="Enter Product Price">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Description</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="description" class="form-control" placeholder="Enter Product Description">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Image</label>
+                                <div class="col-sm-9">
+                                    <input type="file" name="avatar" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-top">
+                            <div class="card-body">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+    const categoryRecord = () => {
+        let categoryid = document.getElementById('category').value;
+        $.ajax({
+            type: "GET",
+            url: `/exsubcategory/ajaxcategorywiserecord?categoryId=${categoryid}`,
+            success: function (res) {
+                let subcategory = res.subcategory;
+                let tbl = "<option value=''>---select subcategory---</option>";
+                subcategory.map((cat) => {
+                    tbl += `<option value='${cat?._id}'>${cat?.subcategory}</option>`;
+                });
+                document.getElementById('subcategory').innerHTML = tbl;
+            }
+        });
+    };
+
+    const subcategoryRecord = () => {
+        let subcategoryid = document.getElementById('subcategory').value;
+        $.ajax({
+            type: "GET",
+            url: `/product/ajaxsubcategorywiserecord?subcategoryId=${subcategoryid}`,
+            success: function (res) {
+                let exsubcat = res.exsubcategory;
+                let tbl = "<option value=''>---select exsubcategory---</option>";
+                exsubcat.map((cat) => {
+                    tbl += `<option value='${cat?._id}'>${cat?.exsubcategory}</option>`;
+                });
+                document.getElementById('exsubcategory').innerHTML = tbl;
+            }
+        });
+    };
+</script>
+
+<%- include('../footer') %>
