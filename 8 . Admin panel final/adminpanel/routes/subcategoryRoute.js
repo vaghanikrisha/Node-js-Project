@@ -2,7 +2,7 @@ const express = require('express');
 
 const routes = express.Router();
 
-const { viewSubCategory, addSubCategory, insertSubcategory, deleteSubcategory, editSubcategory, updateSubcategory, changeStatus } = require('../controllers/SubcategoryController');
+const { viewSubCategory, addSubCategory, insertSubcategory, deleteSubcategory, editSubcategory, updateSubcategory, changeStatus } = require('../controller/SubcategoryController');
 
 
 routes.get('/', viewSubCategory);

@@ -2,14 +2,13 @@ const passport = require('passport');
 
 const passportLocal = require('passport-local').Strategy;
 
-const UserModel = require('../models/UserModel');
-
+const UserModel = require('../models/authModel');
 
 passport.use(new passportLocal({
     usernameField: 'email',
 }, async (email, password, done) => {
     try {
-        const user = await UserModel.findOne({ email: email, password: password });
+        const user = await UserModel.findOne({ email: email, password: password });        
         if (!user) {
             console.log("Email and Password not match");
             return done(null, false);

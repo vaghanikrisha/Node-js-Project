@@ -2,7 +2,7 @@ const express = require('express');
 
 const routes = express.Router();
 
-const { viewCategory, addCategory, insertCategory, deleteCategory, editCategory, updateCategory, changeStatus } = require('../controllers/CategoryController');
+const { viewCategory, addCategory, insertCategory, deleteCategory, editCategory, updateCategory, changeStatus } = require('../controller/CategoryController');
 
 
 

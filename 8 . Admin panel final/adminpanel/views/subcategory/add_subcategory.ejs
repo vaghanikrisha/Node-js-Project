@@ -1,197 +1,47 @@
 <%- include('../header') %>
 
-<style>
-/* General Styling */
-body {
-    font-family: 'Poppins', sans-serif;
-    background:linear-gradient(135deg, #cecfd3, #243b55);
-    margin: 0;
-    padding: 0;
-}
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row justify-content-center ">
+                <div class="col-md-6">
+                            <div class="card ">
+                                <form class="form-horizontal" method="post" action="/subcategory/insertsubcategory">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Add Subcategory</h4>
+                                        <div class="form-group row">
+                                            <label for="fname"
+                                                class="col-sm-3 text-right control-label col-form-label">Category</label>
+                                            <div class="col-sm-9">
+                                                <select name="category" class="form-control">
+                                                    <option>---select category---</option>
+                                                    <% category.map((cat,index)=>{ %>
+                                                        <option value="<%= cat?.id %>">
+                                                            <%= cat?.category %>
+                                                        </option>
+                                                        <% }) %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="fname"
+                                                class="col-sm-3 text-right control-label col-form-label">Subcategory</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="subcategory" class="form-control"
+                                                    placeholder="Subcategory Name Here">
+                                            </div>
+                                        </div>
 
-/* Page Wrapper */
-.page-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background:linear-gradient(135deg, #cecfd3, #243b55);
-    padding: 20px;
-  }
-
-  
-
-/* Container */
-.container-fluid {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-/* Card Styling */
-.card {
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
-    padding: 25px;
-    transition: 0.3s ease-in-out;
-    width: 100%;
-    max-width: 600px;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-/* Card Title */
-.card-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Success Alert */
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-    padding: 10px;
-    text-align: center;
-    border-radius: 6px;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
-/* Form Styling */
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-control {
-    border-radius: 8px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    transition: 0.3s;
-    font-size: 16px;
-}
-
-.form-control {
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    padding: 12px;
-    font-size: 15px;
-    transition: 0.3s ease-in-out;
-}
-
-.form-control:focus {
-    border-color: #ff758c;
-    box-shadow: 0 0 8px rgba(255, 117, 140, 0.5);
-}
-
-/* Label Styling */
-.control-label {
-    font-weight: 600;
-    color: #555;
-}
-
-/* Select Dropdown */
-select.form-control {
-    cursor: pointer;
-}
-
-/* Button Styles */
-.btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 6px;
-    transition: 0.3s ease-in-out;
-    display: block;
-    width: 100%;
-    text-align: center;
-}
-/* Submit Button */
-.btn-primary {
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    border: none;
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 8px;
-    transition: all 0.3s ease-in-out;
-    width: 100%;
-    display: block;
-    text-transform: uppercase;
-}
-
-.btn-primary:hover {
-    background: linear-gradient(135deg, #ff7eb3, #ff758c);
-    box-shadow: 0px 4px 10px rgba(255, 117, 140, 0.5);
-    transform: translateY(-2px);
-}
-
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .card {
-        width: 90%;
-    }
-
-    .form-control {
-        font-size: 14px;
-    }
-}
-</style>
-
-<div class="page-wrapper">
-    <div class="container-fluid">
-        <div class="col-md-6">
-            <% if(locals?.message?.success) { %>
-                <div class="alert alert-success" role="alert">
-                    <%= locals?.message?.success %>
+                                    </div>
+                                    <div class="border-top">
+                                        <div class="card-body">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                 </div>
-            <% } %>
-
-            <div class="card">
-                <form class="form-horizontal" method="post" action="/subcategory/insertsubcategory">
-                    <div class="card-body">
-                        <h4 class="card-title">Add Subcategory</h4>
-
-                        <!-- Category Dropdown -->
-                        <div class="form-group row">
-                            <label for="category" class="col-sm-4 control-label col-form-label">Category</label>
-                            <div class="col-sm-8">
-                                <select name="category" class="form-control" required>
-                                    <option disabled selected>--- Select Category ---</option>
-                                    <% category.map((cat, index) => { %>
-                                        <option value="<%= cat?.id %>"><%= cat?.category %></option>
-                                    <% }) %>
-                                </select>
-                            </div>
-                        </div>
-
-                        <!-- Subcategory Input -->
-                        <div class="form-group row">
-                            <label for="subcategory" class="col-sm-4 control-label col-form-label">Subcategory</label>
-                            <div class="col-sm-8">
-                                <input type="text" id="subcategory" name="subcategory" class="form-control"
-                                    placeholder="Enter Subcategory Name" required>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="border-top">
-                        <div class="card-body">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-                </form>
             </div>
-
         </div>
     </div>
-</div>
 
-<%- include('../footer') %>
+    <%- include('../footer') %>

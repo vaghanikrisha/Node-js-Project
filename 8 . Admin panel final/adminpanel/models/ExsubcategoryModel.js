@@ -15,7 +15,7 @@ const exsubcategorySchema = mongoose.Schema({
     },
     status: {
         type: String,
-        default: "deactive"
+        default: "active"
     }
 })
 

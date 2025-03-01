@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const productSchema = mongoose.Schema({
+const productSchma = mongoose.Schema({
     categoryId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'category'
@@ -15,11 +15,11 @@ const productSchema = mongoose.Schema({
     },
     product: {
         type: String,
-        required: true
+        require: true
     },
     price: {
         type: Number,
-        required: true
+        require: true
     },
     description: {
         type: String,
@@ -31,9 +31,9 @@ const productSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        default: "deactive"
+        default: 'active'
     }
-})
+});
 
-const product = mongoose.model('product', productSchema);
-module.exports = product
+const product = mongoose.model('product', productSchma)
+module.exports = product;

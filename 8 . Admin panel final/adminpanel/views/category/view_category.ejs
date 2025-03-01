@@ -1,216 +1,66 @@
 <%- include('../header') %>
 
-<style>
-/* General Styling */
-body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #cecfd3, #243b55);
-    margin: 0;
-    padding: 0;
-}
 
-/* Page Wrapper */
-.page-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #cecfd3, #243b55);
-    padding: 20px;
-}
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title m-b-0">View Category</h5>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% categories.map((cat,index)=>{ %>
+                                    <tr>
+                                        <th scope="row">
+                                            <%= ++index %>
+                                        </th>
+                                        <td>
+                                            <%= cat?.category %>
+                                        </td>
+                                        <td>
+                                            <a href="/category/deletecategory?id=<%= cat?.id %>"
+                                                class="btn btn-danger btn-sm">Delete</a>
 
-/* Container */
-.container-fluid {
-    width: 100%;
-}
 
-/* Card Styling */
-.card {
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
-    padding: 20px;
-    transition: 0.3s ease-in-out;
-}
+                                            <a href="/category/editcategory?id=<%= cat?.id %>"
+                                                class="btn btn-primary btn-sm">Edit</a>
+                                        </td>
+                                        <td>
 
-.card:hover {
-    transform: translateY(-5px);
-}
+                                            <% if(cat?.status==="active" ) { %>
+                                                <a href="/category/changestatus?id=<%= cat?.id %>&status=deactive"
+                                                    class="btn btn-success btn-sm">
+                                                    <%= cat?.status %>
+                                                </a>
+                                                <% } else { %>
+                                                    <a href="/category/changestatus?id=<%= cat?.id %>&status=active"
+                                                        class="btn btn-danger btn-sm">
+                                                        <%= cat?.status %>
+                                                    </a>
+                                                    <% } %>
 
-/* Card Title */
-.card-title {
-    font-size: 22px;
-    font-weight: bold;
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 15px;
-}
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
 
-/* Alerts */
-.alert {
-    text-align: center;
-    font-weight: 600;
-    border-radius: 6px;
-}
-
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-.alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-
-/* Table Styling */
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
-}
-
-.table thead {
-    background: #3498db;
-    color: white;
-}
-
-.table thead th {
-    padding: 12px;
-    text-align: center;
-    font-size: 16px;
-}
-
-.table tbody tr {
-    transition: 0.3s ease-in-out;
-}
-
-.table tbody tr:hover {
-    background: rgba(52, 152, 219, 0.1);
-}
-
-.table tbody td {
-    padding: 10px;
-    text-align: center;
-    font-size: 14px;
-}
-
-/* Action Buttons */
-.btn {
-    padding: 8px 15px;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 6px;
-    transition: 0.3s ease-in-out;
-}
-
-.btn-danger {
-    background: #e74c3c;
-    border: none;
-    color: white;
-}
-
-.btn-danger:hover {
-    background: #c0392b;
-}
-
-.btn-primary {
-    background: #2980b9;
-    border: none;
-    color: white;
-}
-
-.btn-primary:hover {
-    background: #1c6ea4;
-}
-
-.btn-success {
-    background: #2ecc71;
-    border: none;
-    color: white;
-}
-
-.btn-success:hover {
-    background: #27ae60;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .card {
-        padding: 15px;
-    }
-    .table {
-        font-size: 12px;
-    }
-    .btn {
-        padding: 6px 10px;
-        font-size: 12px;
-    }
-}
-</style>
-
-<!-- Alerts at the Top -->
-<div class="alert-wrapper">
-   
-
-    <% if(locals?.message?.delete) { %>
-        <div class="alert alert-danger" role="alert">
-            <%= locals?.message?.delete %>
-        </div>
-    <% } %>
-</div>
-
-<div class="page-wrapper">
-    <div class="container-fluid">
-        <div class="card">
-            <% if(locals?.message?.success) { %>
-                <div class="alert alert-success" role="alert">
-                    <%= locals?.message?.success %>
                 </div>
-            <% } %>
-            <div class="card-body">
-                <h5 class="card-title">View Categories</h5>
             </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Action</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% categories.map((cat, index) => { %>
-                        <tr>
-                            <th scope="row"><%= ++index %></th>
-                            <td><%= cat?.category %></td>
-                            <td>
-                                <a href="/category/deletecategory?id=<%= cat?.id %>" class="btn btn-danger btn-sm">Delete</a>
-                                <a href="/category/editcategory?id=<%= cat?.id %>" class="btn btn-primary btn-sm">Edit</a>
-                            </td>
-                            <td>
-                                <% if(cat?.status === "active") { %>
-                                    <a href="/category/changestatus?id=<%= cat?.id %>&status=deactive" class="btn btn-success btn-sm">
-                                        <%= cat?.status %>
-                                    </a>
-                                <% } else { %>
-                                    <a href="/category/changestatus?id=<%= cat?.id %>&status=active" class="btn btn-danger btn-sm">
-                                        <%= cat?.status %>
-                                    </a>
-                                <% } %>
-                            </td>
-                        </tr>
-                    <% }) %>
-                </tbody>
-            </table>
         </div>
     </div>
-</div>
 
-<%- include('../footer') %>
+
+
+    <%- include('../footer') %>

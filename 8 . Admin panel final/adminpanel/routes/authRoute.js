@@ -2,25 +2,23 @@ const express = require('express');
 
 const routes = express.Router();
 
-const { loginPage, registerPage, registerUser, loginUser, dashboardPage, logout, otpPage, newPasswordPage, forgotPassword, userOtp, usernewPassword } = require('../controllers/AuthController');
+const { LoginPage, RegisterPage, RegisterUser, LoginUser, DashboardPage, Logout, forgetPassword ,otpPage,  userOtp,newPasswordPage, usernewPassword} = require('../controller/AuthController');
 
 const passport = require('passport');
 
-routes.get('/', loginPage)
-routes.get('/register', registerPage)
-routes.post('/registeruser', registerUser)
-routes.post('/loginuser', passport.authenticate('local', { failureRedirect: '/' }), loginUser)
+
+routes.get('/' ,LoginPage);
+routes.get('/register' , RegisterPage);
+routes.post('/registerUser' , RegisterUser);
+routes.post('/loginUser', passport.authenticate('local', { failureRedirect: '/' }), LoginUser);
+routes.get('/dashboard',passport.checkUser, DashboardPage);
+routes.get('/logout', passport.checkUser ,Logout);
 
 
-routes.get('/dashboard', passport.checkUser, dashboardPage)
-routes.get('/logout', logout)
-
-
-//forgot password
+routes.post('/forgotpassword', forgetPassword)
 routes.get('/otp', otpPage)
-routes.get('/newpassword', newPasswordPage)
-routes.post('/forgotpassword', forgotPassword)
 routes.post('/userotp', userOtp)
+routes.get('/newpassword', newPasswordPage)
 routes.post('/usernewpassword', usernewPassword)
 
 
